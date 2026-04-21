@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PFL Odds Widget</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: 'Barlow', sans-serif;
+}
+
+.demo-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.35);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+/* WIDGET */
+.pfl-widget {
+  width: 320px;
+  background: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.08);
+  font-family: 'Barlow', sans-serif;
+}
+
+/* HEADER */
+.w-header {
+  background: #052383;
+  padding: 12px 14px 11px;
+}
+.w-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+.w-event-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+.w-live {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+.w-live-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #ff0404;
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.w-event-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.w-event-name em { color: #ff0404; font-style: normal; }
+.w-event-sub {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* FIGHT TABS */
+.w-fight-tabs {
+  display: flex;
+  background: #041a45;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.w-fight-tabs::-webkit-scrollbar { display: none; }
+.w-ftab {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.12s;
+}
+.w-ftab:hover { color: rgba(255,255,255,0.7); }
+.w-ftab.active { color: #ffffff; border-bottom-color: #ff0404; }
+
+/* MATCHUP */
+.w-matchup {
+  background: #052383;
+  padding: 12px 14px 11px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 3px solid #ff0404;
+}
+.w-fighter { text-align: center; }
+.w-flag { font-size: 15px; line-height: 1; margin-bottom: 3px; }
+.w-fname {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  line-height: 1.1;
+}
+.w-frec {
+  font-size: 9px;
+  color: rgba(255,255,255,0.38);
+  margin-top: 1px;
+}
+.w-vs-block { text-align: center; }
+.w-vs {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.08em;
+}
+.w-wclass {
+  font-size: 8px;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 1px;
+}
+
+/* MARKET TABS */
+.w-market-tabs {
+  display: flex;
+  background: #f5f5f5;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.w-mtab {
+  flex: 1;
+  padding: 7px 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.38);
+  text-align: center;
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.w-mtab:hover { color: rgba(0,0,0,0.65); }
+.w-mtab.active { color: #052383; border-bottom-color: #ff0404; }
+
+/* GRID HEADER */
+.w-grid-head {
+  display: grid;
+  grid-template-columns: 1fr 58px 58px 46px;
+  padding: 5px 14px;
+  background: #f9f9f9;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  gap: 4px;
+}
+.w-gh {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.3);
+}
+.w-gh.c { text-align: center; }
+.w-gh.r { text-align: right; }
+
+/* GRID ROWS */
+.w-grid { background: #ffffff; }
+
+.w-row {
+  display: grid;
+  grid-template-columns: 1fr 58px 58px 46px;
+  align-items: center;
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.055);
+  gap: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.1s;
+}
+.w-row:last-child { border-bottom: none; }
+.w-row:hover { background: #f7f7f7; }
+
+.w-logo { height: 22px; display: flex; align-items: center; }
+.w-logo svg { max-height: 20px; max-width: 88px; width: auto; display: block; }
+
+.w-odd {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  padding: 4px 2px;
+  border-radius: 3px;
+  line-height: 1;
+  transition: all 0.12s;
+}
+.w-odd.fav { color: #0d6e2f; background: rgba(13,110,47,0.08); }
+.w-odd.dog { color: #052383; background: rgba(5,35,131,0.07); }
+.w-odd.tbd { color: rgba(0,0,0,0.22); font-size: 10px; font-weight: 600; }
+.w-odd:hover:not(.tbd) { background: #052383; color: #fff; }
+
+.w-bet-cell { display: flex; justify-content: flex-end; }
+.w-bet {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #ff0404;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 7px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.12s;
+}
+.w-bet:hover { opacity: 0.78; }
+
+/* BEST ODDS ROW HIGHLIGHT */
+.w-row.best-a .w-odd:first-of-type { background: rgba(255,4,4,0.08); color: #cc0000; font-size: 16px; }
+.w-row.best-b .w-odd:last-of-type { background: rgba(255,4,4,0.08); color: #cc0000; font-size: 16px; }
+
+/* GEO BAR */
+.w-geo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 14px;
+  background: #f5f5f5;
+  border-top: 1px solid rgba(0,0,0,0.07);
+}
+.w-geo-lbl { font-size: 10px; color: rgba(0,0,0,0.32); }
+.w-geo-tgl {
+  display: flex;
+  background: rgba(0,0,0,0.07);
+  border-radius: 3px;
+  padding: 2px;
+  gap: 1px;
+}
+.w-gbtn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+  border: none;
+  background: transparent;
+  color: rgba(0,0,0,0.38);
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.w-gbtn.active { background: #052383; color: #ffffff; }
+
+/* FOOTER */
+.w-footer {
+  padding: 7px 14px;
+  background: #f9f9f9;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.w-disclaimer {
+  font-size: 9px;
+  color: rgba(0,0,0,0.28);
+  line-height: 1.4;
+}
+.w-pfl-mark { opacity: 0.15; }
+
+
+/* Line movement indicator */
+.w-odd { position: relative; }
+.move-arrow {
+  position: absolute;
+  top: -2px;
+  right: 2px;
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+}
+.move-arrow.up { color: #0d6e2f; }
+.move-arrow.down { color: #ff0404; }
+
+/* Flash on odds change */
+@keyframes oddFlash { 0%{background:#fffacd} 100%{background:transparent} }
+.flash { animation: oddFlash 0.7s ease; }
+</style>
+
+<style>
+.sharebar{
+  position:sticky; top:0; z-index:9999;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:12px 18px;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(0,0,0,0.08);
+  font-family:Arial, Helvetica, sans-serif;
+}
+.sharebar-left{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.sharebar-title{font-size:14px; font-weight:700; color:#111;}
+.sharebar-sub{font-size:12px; color:rgba(0,0,0,0.6);}
+.sharebar-links{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.sharebar a,.sharebar button{
+  appearance:none; border:1px solid rgba(0,0,0,0.1); background:#fff; color:#111;
+  text-decoration:none; padding:8px 12px; border-radius:8px; cursor:pointer; font-size:12px; font-weight:600;
+}
+.sharebar a:hover,.sharebar button:hover{background:#f4f4f4;}
+@media (max-width: 720px){
+  .sharebar{padding:10px 12px; align-items:flex-start; flex-direction:column;}
+}
+</style>
+<script>
+function copyPageLink(btn){
+  const fallback = () => {
+    const input = document.createElement('input');
+    input.value = window.location.href;
+    document.body.appendChild(input);
+    input.select();
+    try { document.execCommand('copy'); btn.textContent = 'Link copied'; } catch(e) {}
+    document.body.removeChild(input);
+    setTimeout(()=>btn.textContent='Copy page link', 1500);
+  };
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(window.location.href).then(()=>{
+      btn.textContent='Link copied';
+      setTimeout(()=>btn.textContent='Copy page link', 1500);
+    }).catch(fallback);
+  } else { fallback(); }
+}
+</script>
+
+</head>
+<body>
+<div class="sharebar">
+  <div class="sharebar-left">
+    <div class="sharebar-title">PFL Odds Widget</div>
+    <div class="sharebar-sub">Standalone HTML page for internal sharing</div>
+  </div>
+  <div class="sharebar-links">
+    <a href="index.html">All pages</a>
+    <button onclick="copyPageLink(this)">Copy page link</button>
+  </div>
+</div>
+
+<div style="width:320px">
+  <div class="demo-label">PFL Betting Hub — Odds Widget</div>
+
+  <div class="pfl-widget">
+
+    <!-- HEADER -->
+    <div class="w-header">
+      <div class="w-header-top">
+        <span class="w-event-label">PFL Sioux Falls · May 2 2026</span>
+        <span class="w-live"><span class="w-live-dot"></span>Live odds</span>
+      </div>
+      <div class="w-event-name">Storley <em>vs</em> Zendeli</div>
+      <div class="w-event-sub">Sanford Pentagon · ESPN2 · 10pm ET</div>
+    </div>
+
+    <!-- FIGHT TABS -->
+    <div class="w-fight-tabs" id="fightTabs">
+      <button class="w-ftab active" onclick="selectFight(0,this)">Storley v Zendeli</button>
+      <button class="w-ftab" onclick="selectFight(1,this)">Rabadanov v Chizov</button>
+      <button class="w-ftab" onclick="selectFight(2,this)">Ferreira v Bilostenniy</button>
+      <button class="w-ftab" onclick="selectFight(3,this)">Magomedov v Higo</button>
+      <button class="w-ftab" onclick="selectFight(4,this)">Powell v Sordi</button>
+    </div>
+
+    <!-- MATCHUP -->
+    <div class="w-matchup">
+      <div class="w-fighter">
+        <div class="w-flag" id="flagA">🇺🇸</div>
+        <div class="w-fname" id="nameA">Logan<br>Storley</div>
+        <div class="w-frec" id="recA">18–4</div>
+      </div>
+      <div class="w-vs-block">
+        <div class="w-vs">VS</div>
+        <div class="w-wclass" id="wclass">WW · 170</div>
+      </div>
+      <div class="w-fighter">
+        <div class="w-flag" id="flagB">🇦🇱</div>
+        <div class="w-fname" id="nameB">Florim<br>Zendeli</div>
+        <div class="w-frec" id="recB">11–1–1</div>
+      </div>
+    </div>
+
+    <!-- MARKET TABS -->
+    <div class="w-market-tabs">
+      <button class="w-mtab active" onclick="selectMarket('ml',this)">Moneyline</button>
+      <button class="w-mtab" onclick="selectMarket('method',this)">Method</button>
+      <button class="w-mtab" onclick="selectMarket('rounds',this)">Rounds</button>
+      <button class="w-mtab" onclick="selectMarket('props',this)">Props</button>
+    </div>
+
+    <!-- GRID HEADER -->
+    <div class="w-grid-head">
+      <div class="w-gh">Book</div>
+      <div class="w-gh c" id="colA">Storley</div>
+      <div class="w-gh c" id="colB">Zendeli</div>
+      <div class="w-gh r">Bet</div>
+    </div>
+
+    <!-- GRID BODY -->
+    <div class="w-grid" id="oddsGrid"></div>
+
+    <!-- GEO -->
+    <div class="w-geo">
+      <span class="w-geo-lbl">Books for</span>
+      <div class="w-geo-tgl">
+        <button class="w-gbtn active" id="btnUS" onclick="setGeo('us')">🇺🇸 US</button>
+        <button class="w-gbtn" id="btnIntl" onclick="setGeo('intl')">🌍 Intl</button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="w-footer">
+      <div class="w-disclaimer">18+ · Odds change · Please gamble responsibly</div>
+      <svg class="w-pfl-mark" width="22" height="18" viewBox="0 0 22 18" fill="none">
+        <path d="M11 1L5.5 7.5L1 3.5L3.5 17H18.5L21 3.5L16.5 7.5L11 1Z" fill="#052383"/>
+      </svg>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ── FIGHTS DATA ── */
+const FIGHTS = [
+  { nameA:'Logan\nStorley',    recA:'18–4',    flagA:'🇺🇸', nameB:'Florim\nZendeli',     recB:'11–1–1', flagB:'🇦🇱', wclass:'WW · 170', hA:'Storley',    hB:'Zendeli',
+    ml:{us:[[-175,145],[-180,155],[-165,140],[-175,148],[-175,150]],intl:[[-175,145],[-180,155],[-170,145],[-165,140],[-172,148]]},
+    method:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+    rounds:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+    props:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+  },
+  { nameA:'Gadzhi\nRabadanov', recA:'26–5–2',  flagA:'🇷🇺', nameB:'Alex\nChizov',        recB:'13–3',   flagB:'🇱🇻', wclass:'LW · 155', hA:'Rabadanov', hB:'Chizov',
+    ml:{us:[[-340,260],[-350,270],[-330,255],[-340,260],[-335,260]],intl:[[-340,260],[-355,275],[-330,255],[-340,260],[-340,265]]},
+    method:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+    rounds:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+    props:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+  },
+  { nameA:'Renan\nFerreira',   recA:'13–5',    flagA:'🇧🇷', nameB:'Sergei\nBilostenniy', recB:'14–4',   flagB:'🇺🇦', wclass:'HW · 265', hA:'Ferreira',  hB:'Bilostenniy',
+    ml:{us:[[-220,180],[-230,190],[-215,175],[-220,180],[-220,182]],intl:[[-220,180],[-230,190],[-215,175],[-222,182],[-218,178]]},
+    method:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+    rounds:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+    props:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+  },
+  { nameA:'M.\nMagomedov',     recA:'21–5',    flagA:'🇷🇺', nameB:'Leandro\nHigo',       recB:'23–7',   flagB:'🇧🇷', wclass:'BW · 135', hA:'Magomedov', hB:'Higo',
+    ml:{us:[[-155,125],[-160,130],[-150,120],[-158,128],[-155,125]],intl:[[-155,125],[-160,130],[-150,120],[-155,125],[-157,127]]},
+    method:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+    rounds:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+    props:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+  },
+  { nameA:'Simeon\nPowell',    recA:'LHW',     flagA:'🇬🇧', nameB:'Emiliano\nSordi',     recB:'LHW',    flagB:'🇦🇷', wclass:'LHW · 205',hA:'Powell',    hB:'Sordi',
+    ml:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+    method:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+    rounds:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+    props:{us:[[null,null],[null,null],[null,null],[null,null],[null,null]],intl:[[null,null],[null,null],[null,null],[null,null],[null,null]]},
+  },
+];
+
+/* ── BOOKS CONFIG — swap # for real affiliate URLs ── */
+const BOOKS = {
+  us:[
+    { name:'FanDuel',    url:'#FANDUEL_URL',    logo:`<svg viewBox="0 0 108 24" xmlns="http://www.w3.org/2000/svg"><text y="19" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="20" fill="#1e90e6">Fan</text><text x="38" y="19" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="20" fill="#003087">Duel</text></svg>` },
+    { name:'DraftKings', url:'#DRAFTKINGS_URL',  logo:`<svg viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="2" width="20" height="20" rx="3" fill="#53d337"/><text x="4" y="17" font-family="Barlow Condensed,sans-serif" font-weight="900" font-size="13" fill="#fff">DK</text><text x="25" y="19" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="17" fill="#111">DraftKings</text></svg>` },
+    { name:'Fanatics',   url:'#FANATICS_URL',    logo:`<svg viewBox="0 0 100 24" xmlns="http://www.w3.org/2000/svg"><text y="19" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="20" fill="#e31837">Fanatics</text></svg>` },
+    { name:'Kalshi',     url:'#KALSHI_URL',      logo:`<svg viewBox="0 0 84 24" xmlns="http://www.w3.org/2000/svg"><text y="19" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="20" fill="#0f0f0f">Kalshi</text></svg>` },
+    { name:'Polymarket', url:'#POLYMARKET_URL',  logo:`<svg viewBox="0 0 108 24" xmlns="http://www.w3.org/2000/svg"><text y="19" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="19" fill="#0050ff">Polymarket</text></svg>` },
+  ],
+  intl:[
+    { name:'Cloudbet',   url:'https://www.cloudbet.com/en/lp/pfl', logo:`<svg viewBox="0 0 106 24" xmlns="http://www.w3.org/2000/svg"><text y="19" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="20" fill="#003dcc">Cloud</text><text x="57" y="19" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="20" fill="#00aaff">bet</text></svg>` },
+    { name:'Bet365',     url:'#BET365_URL',      logo:`<svg viewBox="0 0 84 24" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="22" rx="3" fill="#027b5b" y="1"/><text x="6" y="17" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="17" fill="#fff">bet365</text></svg>` },
+    { name:'Unibet',     url:'#UNIBET_URL',      logo:`<svg viewBox="0 0 82 24" xmlns="http://www.w3.org/2000/svg"><text y="19" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="20" fill="#007b3b">Unibet</text></svg>` },
+    { name:'Ladbrokes',  url:'#LADBROKES_URL',   logo:`<svg viewBox="0 0 106 24" xmlns="http://www.w3.org/2000/svg"><text y="19" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="19" fill="#ce0e2d">Ladbrokes</text></svg>` },
+    { name:'Bwin',       url:'#BWIN_URL',        logo:`<svg viewBox="0 0 64 24" xmlns="http://www.w3.org/2000/svg"><text y="20" font-family="Barlow Condensed,sans-serif" font-weight="900" font-size="23" fill="#ff6600">bwin</text></svg>` },
+  ],
+};
+
+/* ── STATE ── */
+let fight  = 0;
+let market = 'ml';
+let geo    = 'us';
+
+/* Auto geo */
+try { if(!Intl.DateTimeFormat().resolvedOptions().timeZone.startsWith('America/')) { geo='intl'; document.getElementById('btnUS').classList.remove('active'); document.getElementById('btnIntl').classList.add('active'); } } catch(e){}
+
+
+/* Opening line snapshot — captured once on first render */
+const OPENING = {};
+function keyFor(fightIdx, marketKey, geo, bookIdx, col) {
+  return `${fightIdx}|${marketKey}|${geo}|${bookIdx}|${col}`;
+}
+function snapshotOpening() {
+  FIGHTS.forEach((f, fi) => {
+    ['ml','method','rounds','props'].forEach(mk => {
+      ['us','intl'].forEach(g => {
+        const rows = f[mk][g];
+        if (!rows) return;
+        rows.forEach((row, bi) => {
+          const [a,b] = row;
+          OPENING[keyFor(fi,mk,g,bi,0)] = a;
+          OPENING[keyFor(fi,mk,g,bi,1)] = b;
+        });
+      });
+    });
+  });
+}
+function moveArrow(fightIdx, marketKey, geo, bookIdx, col, current) {
+  if (current === null) return '';
+  const open = OPENING[keyFor(fightIdx,marketKey,geo,bookIdx,col)];
+  if (open === null || open === undefined) return '';
+  if (current === open) return '';
+  const dir = current > open ? 'up' : 'down';
+  const sym = current > open ? '▲' : '▼';
+  return `<span class="move-arrow ${dir}" title="Opening: ${fmt(open)}">${sym}</span>`;
+}
+
+/* ── FORMAT ODDS ── */
+function fmt(v) {
+  if(v===null) return 'TBC';
+  return v>0 ? '+'+v : String(v);
+}
+
+/* ── FIND BEST ODDS ── */
+function bestIdx(arr, col) {
+  let best=null, idx=-1;
+  arr.forEach(([a,b],i)=>{
+    const v = col===0?a:b;
+    if(v===null) return;
+    if(best===null || v>best){best=v;idx=i;}
+  });
+  return idx;
+}
+
+/* ── RENDER ── */
+function render() {
+  const f = FIGHTS[fight];
+  const books = BOOKS[geo];
+  const data  = f[market][geo];
+
+  document.getElementById('nameA').innerHTML  = f.nameA.replace('\n','<br>');
+  document.getElementById('nameB').innerHTML  = f.nameB.replace('\n','<br>');
+  document.getElementById('recA').textContent  = f.recA;
+  document.getElementById('recB').textContent  = f.recB;
+  document.getElementById('flagA').textContent = f.flagA;
+  document.getElementById('flagB').textContent = f.flagB;
+  document.getElementById('wclass').textContent= f.wclass;
+  document.getElementById('colA').textContent  = f.hA;
+  document.getElementById('colB').textContent  = f.hB;
+
+  const bestA = bestIdx(data, 0);
+  const bestB = bestIdx(data, 1);
+
+  document.getElementById('oddsGrid').innerHTML = books.map((b,i)=>{
+    const [oA,oB] = data[i]||[null,null];
+    const tbd = oA===null;
+    const clA = tbd?'tbd':(oA<0?'fav':'dog');
+    const clB = tbd?'tbd':(oB<0?'fav':'dog');
+    const bestClass = (i===bestA?' best-a':'')+(i===bestB?' best-b':'');
+    const arrA = moveArrow(fight, market, geo, i, 0, oA);
+    const arrB = moveArrow(fight, market, geo, i, 1, oB);
+    return `<a href="${b.url}" class="w-row${bestClass}" target="_blank" rel="noopener" onclick="track('${b.name}')">
+      <div class="w-logo">${b.logo}</div>
+      <div class="w-odd ${clA}">${fmt(oA)}${arrA}</div>
+      <div class="w-odd ${clB}">${fmt(oB)}${arrB}</div>
+      <div class="w-bet-cell"><a href="${b.url}" class="w-bet" target="_blank" rel="noopener" onclick="event.stopPropagation();track('${b.name}')">Bet<svg width="7" height="7" viewBox="0 0 7 7" fill="none"><path d="M1 6L6 1M6 1H2.5M6 1V4.5" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    </a>`;
+  }).join('');
+}
+
+function selectFight(i,btn) {
+  fight=i;
+  document.querySelectorAll('.w-ftab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function selectMarket(m,btn) {
+  market=m;
+  document.querySelectorAll('.w-mtab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function setGeo(g) {
+  geo=g;
+  document.getElementById('btnUS').classList.toggle('active',g==='us');
+  document.getElementById('btnIntl').classList.toggle('active',g==='intl');
+  render();
+}
+
+function track(name) {
+  /* Hook analytics here */
+  console.log('Click:', name, FIGHTS[fight].hA+'v'+FIGHTS[fight].hB, market);
+}
+
+snapshotOpening();
+render();
+</script>
+</body>
+</html>

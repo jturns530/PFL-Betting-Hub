@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PFL Sioux Falls — Full Card Odds Breakdown</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,900&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red2:    #ff0404;
+  --dark:    #03112e;
+  --mid:     #ffffff;
+  --surface: #ebebeb;
+  --raised:  #e0e0e0;
+  --border:  rgba(0,0,0,0.09);
+  --bordhi:  rgba(0,0,0,0.18);
+  --text:    #0d0d0d;
+  --muted:   rgba(10,10,10,0.55);
+  --faint:   rgba(10,10,10,0.32);
+  --fav:     #1a8a3a;
+  --fav-dim: rgba(26,138,58,0.10);
+  --dog:     #FF9F0A;
+  --dog-dim: rgba(255,159,10,0.10);
+}
+
+body {
+  background: #f2f2f2;
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── EVENT BANNER ── */
+.event-banner {
+  width: 100%;
+  height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+.event-banner img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+.event-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(3,17,46,0.15) 0%, rgba(3,17,46,0.88) 100%);
+}
+.event-banner-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.event-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,4,4,0.9);
+  padding: 5px 12px;
+  border-radius: 2px;
+}
+.event-eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.event-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(44px, 7vw, 72px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  color: #ffffff;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+.event-title em { font-style: italic; color: var(--red); display: inline; }
+.event-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 4px 11px;
+  border-radius: 3px;
+  backdrop-filter: blur(4px);
+  font-weight: 500;
+}
+.chip.gold { color: #ffffff; border-color: rgba(255,4,4,0.8); background: rgba(255,4,4,0.7); font-weight: 700; }
+
+/* ── PAGE BODY ── */
+.page { max-width: 960px; margin: 0 auto; padding: 36px 24px 80px; }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--faint);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+.section-label + .section-label { margin-top: 36px; }
+
+/* ── FIGHT CARD ── */
+.fight-card {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+}
+.fight-card:hover { border-color: rgba(0,0,0,0.18); }
+.fight-card.main-event { border-color: rgba(212,172,71,0.28); }
+.fight-card.main-event:hover { border-color: rgba(212,172,71,0.5); }
+
+.card-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 16px;
+  background: #ebebeb;
+  border-bottom: 1px solid var(--border);
+}
+.card-bar-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.card-bar-label.gold { color: var(--red); }
+.card-bar-weight {
+  font-size: 11px;
+  color: var(--muted);
+  background: var(--raised);
+  border: 1px solid var(--border);
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+/* ── MATCHUP GRID ── */
+.matchup {
+  display: grid;
+  grid-template-columns: 1fr 52px 1fr;
+}
+
+.fighter-col { display: flex; flex-direction: column; }
+
+/* Photo — identical 1:1 square crop for every fighter */
+.photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+  background: #0e0e12;
+}
+.photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.45s ease;
+}
+.fight-card:hover .photo img { transform: scale(1.04); }
+.photo-grad {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 45%, #ffffff 100%);
+  pointer-events: none;
+}
+/* tint each side slightly */
+.red-tint  { background: #f0e8e8; }
+.blue-tint { background: #e8eaf5; }
+
+/* placeholder silhouette */
+.photo-ph {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+.ph-svg { opacity: 0.18; }
+
+
+/* Branded initials placeholder when no PFL headshot exists yet */
+.photo-initials {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.photo-initials::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #052383 0%, #0a3aa8 60%, #052383 100%);
+}
+.photo-initials::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      transparent, transparent 14px,
+      rgba(255,255,255,0.03) 14px, rgba(255,255,255,0.03) 15px
+    );
+}
+.photo-initials .init-text {
+  position: relative;
+  z-index: 2;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(60px, 14vw, 110px);
+  font-weight: 900;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  line-height: 1;
+}
+.photo-initials .init-flag {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 2;
+  font-size: 24px;
+  line-height: 1;
+  padding: 4px 8px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 3px;
+  backdrop-filter: blur(6px);
+}
+.photo-initials .init-accent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: #ff0404;
+  z-index: 2;
+}
+
+/* Fighter info */
+.finfo {
+  padding: 11px 14px 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.fflag { font-size: 22px; line-height: 1; margin-bottom: 1px; }
+.fname {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  color: var(--text);
+}
+.frecord {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* Odds chip */
+.odds {
+  margin-top: 7px;
+  padding: 5px 16px 6px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 84px;
+}
+.odds.fav { background: var(--fav-dim); border: 1px solid rgba(52,209,88,0.2); }
+.odds.dog { background: var(--dog-dim); border: 1px solid rgba(255,159,10,0.2); }
+.odds.tbd { background: rgba(0,0,0,0.04); border: 1px solid var(--border); }
+.odds-n {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+}
+.odds-n.fav { color: #1a8a3a; }
+.odds-n.dog { color: var(--dog); }
+.odds-n.tbd { color: var(--faint); font-size: 13px; font-weight: 600; }
+.odds-t {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+.odds-t.fav { color: var(--fav); opacity: 0.65; }
+.odds-t.dog { color: var(--dog); opacity: 0.65; }
+.odds-t.tbd { color: var(--faint); }
+
+/* VS column */
+.vs-col {
+  display: flex; align-items: center; justify-content: center;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  background: #ebebeb;
+}
+.vs-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+  text-transform: uppercase;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+/* Context speech bubble */
+.ctx-wrap {
+  padding: 16px 18px 18px;
+  border-top: 1px solid var(--border);
+  background: rgba(5,35,131,0.025);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.ctx-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy-accent, #052383) 0%, #083080 100%);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(5,35,131,0.2);
+}
+.ctx-bubble {
+  position: relative;
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid rgba(5,35,131,0.12);
+  border-radius: 4px 12px 12px 12px;
+  padding: 10px 14px 12px;
+  font-size: 13px;
+  color: #1a1a1a;
+  line-height: 1.55;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.ctx-bubble::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: -7px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 7px 7px 0;
+  border-color: transparent #ffffff transparent transparent;
+  filter: drop-shadow(-1px 0 0 rgba(5,35,131,0.12));
+}
+.ctx-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 4px;
+  display: block;
+}
+
+
+/* Countdown timer banner */
+.countdown-bar {
+  background: linear-gradient(90deg, #052383 0%, #083080 50%, #052383 100%);
+  color: #ffffff;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  border-bottom: 3px solid #ff0404;
+}
+.countdown-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.countdown-units { display: flex; gap: 14px; align-items: center; }
+.cd-unit { text-align: center; min-width: 44px; }
+.cd-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+.cd-unit.red .cd-num { color: #ff6b6b; }
+.cd-lbl {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-top: 2px;
+}
+.cd-sep {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.25);
+  line-height: 1;
+  margin-top: -4px;
+}
+
+/* Filter pills */
+.filter-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+  align-items: center;
+}
+.filter-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-right: 4px;
+}
+.filter-pill {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #ffffff;
+  color: rgba(0,0,0,0.55);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-pill:hover { border-color: rgba(0,0,0,0.25); color: #000; }
+.filter-pill.active {
+  background: #052383;
+  color: #ffffff;
+  border-color: #052383;
+}
+.fight-card[data-hidden="true"] { display: none; }
+
+/* ── ODDS NOTE ── */
+.odds-note {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 18px;
+}
+.odds-note span {
+  font-size: 11px;
+  color: var(--faint);
+  background: #ebebeb;
+  border: 1px solid var(--border);
+  padding: 4px 12px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* ── DISCLAIMER ── */
+.disclaimer {
+  margin-top: 40px;
+  font-size: 11px;
+  color: rgba(0,0,0,0.30);
+  line-height: 1.7;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+</style>
+
+<style>
+.sharebar{
+  position:sticky; top:0; z-index:9999;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:12px 18px;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(0,0,0,0.08);
+  font-family:Arial, Helvetica, sans-serif;
+}
+.sharebar-left{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.sharebar-title{font-size:14px; font-weight:700; color:#111;}
+.sharebar-sub{font-size:12px; color:rgba(0,0,0,0.6);}
+.sharebar-links{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.sharebar a,.sharebar button{
+  appearance:none; border:1px solid rgba(0,0,0,0.1); background:#fff; color:#111;
+  text-decoration:none; padding:8px 12px; border-radius:8px; cursor:pointer; font-size:12px; font-weight:600;
+}
+.sharebar a:hover,.sharebar button:hover{background:#f4f4f4;}
+@media (max-width: 720px){
+  .sharebar{padding:10px 12px; align-items:flex-start; flex-direction:column;}
+}
+</style>
+<script>
+function copyPageLink(btn){
+  const fallback = () => {
+    const input = document.createElement('input');
+    input.value = window.location.href;
+    document.body.appendChild(input);
+    input.select();
+    try { document.execCommand('copy'); btn.textContent = 'Link copied'; } catch(e) {}
+    document.body.removeChild(input);
+    setTimeout(()=>btn.textContent='Copy page link', 1500);
+  };
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(window.location.href).then(()=>{
+      btn.textContent='Link copied';
+      setTimeout(()=>btn.textContent='Copy page link', 1500);
+    }).catch(fallback);
+  } else { fallback(); }
+}
+</script>
+
+</head>
+<body>
+<div class="sharebar">
+  <div class="sharebar-left">
+    <div class="sharebar-title">PFL Fight Picks</div>
+    <div class="sharebar-sub">Standalone HTML page for internal sharing</div>
+  </div>
+  <div class="sharebar-links">
+    <a href="index.html">All pages</a>
+    <button onclick="copyPageLink(this)">Copy page link</button>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     COUNTDOWN TIMER — auto-calculates from data-target
+     ══════════════════════════════════════════ -->
+<div class="countdown-bar" id="countdownBar" data-target="2026-05-03T02:00:00Z">
+  <span class="countdown-label">First bell in</span>
+  <div class="countdown-units">
+    <div class="cd-unit"><div class="cd-num" id="cdDays">00</div><div class="cd-lbl">Days</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit"><div class="cd-num" id="cdHours">00</div><div class="cd-lbl">Hours</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit"><div class="cd-num" id="cdMins">00</div><div class="cd-lbl">Mins</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit red"><div class="cd-num" id="cdSecs">00</div><div class="cd-lbl">Secs</div></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     EVENT BANNER — swap img src for new events
+     ══════════════════════════════════════════ -->
+<div class="event-banner">
+  <img src="https://pflmma-prod.s3.amazonaws.com/events/background_banners/77752fed6f3cc21eba243e50b8b386a4-1.jpg" alt="PFL Sioux Falls">
+  <div class="event-banner-overlay"></div>
+  <div class="event-banner-content">
+    <div class="event-eyebrow">Odds Breakdown · PFL</div>
+    <div class="event-title">PFL <em>Sioux Falls</em></div>
+    <div class="event-chips">
+      <span class="chip">May 2, 2026</span>
+      <span class="chip">Sanford Pentagon, SD</span>
+      <span class="chip">ESPN2 &amp; ESPN+</span>
+      <span class="chip gold">12 fights · Full card</span>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  
+  <!-- ══════════════════════════════════════════
+       FILTER PILLS — filter fights by weight/status
+       ══════════════════════════════════════════ -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter</span>
+    <button class="filter-pill active" data-filter="all">All fights</button>
+    <button class="filter-pill" data-filter="main">Main card</button>
+    <button class="filter-pill" data-filter="prelim">Prelims</button>
+    <button class="filter-pill" data-filter="confirmed">Odds confirmed</button>
+  </div>
+
+  <div class="odds-note"><span>Odds: DraftKings · Lines TBC pre-event</span></div>
+
+  <!-- ══════════════════════════════════════════
+       MAIN CARD
+       ══════════════════════════════════════════ -->
+  <div class="section-label">Main card · ESPN2 · 10pm ET</div>
+
+  <!-- FIGHT 1: MAIN EVENT -->
+  <div class="fight-card main-event" data-category="main" data-fight-idx="1">
+    <div class="card-bar">
+      <span class="card-bar-label gold">Main event</span>
+      <span class="card-bar-weight">Welterweight · 170 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/db6f84fdfb50d9afab96e38c9eaff114-1.png" alt="Logan Storley">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇺🇸</div>
+          <div class="fname">Logan Storley</div>
+          <div class="frecord">18–4 · #4 Welterweight</div>
+          <div class="odds fav"><span class="odds-n fav">-175</span><span class="odds-t fav">Favourite</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/fdbecded9874af35e450238a763ea21a-1-1.png" alt="Florim Zendeli">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇦🇱</div>
+          <div class="fname">Florim Zendeli</div>
+          <div class="frecord">11–1–1 · #6 Welterweight</div>
+          <div class="odds dog"><span class="odds-n dog">+145</span><span class="odds-t dog">Underdog</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        Storley headlines on home turf — unbeaten in Sioux Falls, four-time D1 All-American. Zendeli won the 2024 PFL Europe welterweight title with an 82% finish rate across 11 pro fights.
+      </div>
+    </div>
+  </div>
+
+  <!-- FIGHT 2: CO-MAIN -->
+  <div class="fight-card" data-category="main" data-fight-idx="2">
+    <div class="card-bar">
+      <span class="card-bar-label">Co-main event</span>
+      <span class="card-bar-weight">Lightweight · 155 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/dbffcfa416cd85e23d5210551d99625c-1.png" alt="Gadzhi Rabadanov">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇷🇺</div>
+          <div class="fname">Gadzhi Rabadanov</div>
+          <div class="frecord">26–5–2 · 2024 PFL LW Champ</div>
+          <div class="odds fav"><span class="odds-n fav">-340</span><span class="odds-t fav">Favourite</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/471431407b8f2577621771fa039e748f-1-1.png" alt="Alex Chizov">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇱🇻</div>
+          <div class="fname">Alex Chizov</div>
+          <div class="frecord">13–3 · PFL Europe LW Champ</div>
+          <div class="odds dog"><span class="odds-n dog">+260</span><span class="odds-t dog">Underdog</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        Team Nurmagomedov product and 2024 PFL Lightweight champion. 12-fight win streak including KOs of Kevin Lee and Marc Diakiese. Chizov steps up sharply from PFL Europe level.
+      </div>
+    </div>
+  </div>
+
+  <!-- FIGHT 3 -->
+  <div class="fight-card" data-category="main" data-fight-idx="3">
+    <div class="card-bar">
+      <span class="card-bar-label">Main card</span>
+      <span class="card-bar-weight">Light Heavyweight · 205 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/9654d580d9f41904da180f21a6ebc06f-1.png" alt="Simeon Powell">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇬🇧</div>
+          <div class="fname">Simeon Powell</div>
+          <div class="frecord">LHW · PFL ranked</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/7da0c5be58ad954df5ee2fe4eb6af1eb.png" alt="Emiliano Sordi">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇦🇷</div>
+          <div class="fname">Emiliano Sordi</div>
+          <div class="frecord">LHW · PFL ranked</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        Sordi brings an Argentine grappling base from his PFL Europe run. Powell is rangy and athletic at 205. Odds and imagery to be added fight week.
+      </div>
+    </div>
+  </div>
+
+  <!-- FIGHT 4 -->
+  <div class="fight-card" data-category="main" data-fight-idx="4">
+    <div class="card-bar">
+      <span class="card-bar-label">Main card</span>
+      <span class="card-bar-weight">Heavyweight · 265 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/ee4db4faeeb2597820539529c153438f-1.png" alt="Renan Ferreira">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇧🇷</div>
+          <div class="fname">Renan Ferreira</div>
+          <div class="frecord">13–5 · 2023 PFL HW Champ</div>
+          <div class="odds fav"><span class="odds-n fav">-220</span><span class="odds-t fav">Favourite</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/05e48bd09ebc8bd74612e2b979057f0f-1.png" alt="Sergei Bilostenniy">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇺🇦</div>
+          <div class="fname">Sergei Bilostenniy</div>
+          <div class="frecord">14–4 · #7 Heavyweight</div>
+          <div class="odds dog"><span class="odds-n dog">+180</span><span class="odds-t dog">Underdog</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        6'8" "Problema" averages barely a round per fight — KO'd Bader in 21 seconds. Bilostenniy enters as a live underdog in the most volatile division in MMA.
+      </div>
+    </div>
+  </div>
+
+  <!-- FIGHT 5 -->
+  <div class="fight-card" data-category="main" data-fight-idx="5">
+    <div class="card-bar">
+      <span class="card-bar-label">Main card</span>
+      <span class="card-bar-weight">Bantamweight · 135 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/6e2557ed09b7dbf0e086652220cc0dc9-1.png" alt="Magomed Magomedov">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇷🇺</div>
+          <div class="fname">M. Magomedov</div>
+          <div class="frecord">21–5 · #3 Bantamweight</div>
+          <div class="odds fav"><span class="odds-n fav">-155</span><span class="odds-t fav">Favourite</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/de9a09dc3e8ccec14079e2fbefedc276-1.png" alt="Leandro Higo">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇧🇷</div>
+          <div class="fname">Leandro Higo</div>
+          <div class="frecord">23–7 · Bellator veteran</div>
+          <div class="odds dog"><span class="odds-n dog">+125</span><span class="odds-t dog">Underdog</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        Magomedov challenged for the Bellator title against Patchy Mix. Higo is durable and experienced. A narrow line that reflects genuine competitive uncertainty at 135.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PRELIMS
+       ══════════════════════════════════════════ -->
+  <div class="section-label">Prelims · ESPN+ · 7pm ET</div>
+
+  <!-- PRELIM 1 -->
+  <div class="fight-card" data-category="prelim" data-fight-idx="6">
+    <div class="card-bar">
+      <span class="card-bar-label">Prelim</span>
+      <span class="card-bar-weight">Light Heavyweight · 205 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <div class="photo-initials">
+            <span class="init-accent"></span>
+            <span class="init-text">RM</span>
+            <span class="init-flag">🇷🇺</span>
+          </div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇷🇺</div>
+          <div class="fname">Rasul Magomedov</div>
+          <div class="frecord">8–0 · Undefeated</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/00605be26d3c9c938d13ca6adc87560e-1.png" alt="Rafael Xavier">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇧🇷</div>
+          <div class="fname">Rafael Xavier</div>
+          <div class="frecord">LHW · Veteran</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        Undefeated Magomedov brings a perfect 8–0 record. Xavier offers seasoned upset potential. A sleeper prelim.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRELIM 2 -->
+  <div class="fight-card" data-category="prelim" data-fight-idx="7">
+    <div class="card-bar">
+      <span class="card-bar-label">Prelim</span>
+      <span class="card-bar-weight">Women's Flyweight · 125 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <div class="photo-initials">
+            <span class="init-accent"></span>
+            <span class="init-text">CB</span>
+            <span class="init-flag">🇺🇸</span>
+          </div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇺🇸</div>
+          <div class="fname">Cheyanne Bowers</div>
+          <div class="frecord">7–2 · PFL debut</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/6a828ab6a059e14278daa855157fc303-1.png" alt="Sabrinna De Sousa">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇧🇷</div>
+          <div class="fname">Sabrinna De Sousa</div>
+          <div class="frecord">5–0 · Undefeated · #9</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        Former LFA flyweight champion Bowers makes her PFL debut. De Sousa enters undefeated at 5–0 with two wins already inside the PFL cage.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRELIM 3 -->
+  <div class="fight-card" data-category="prelim" data-fight-idx="8">
+    <div class="card-bar">
+      <span class="card-bar-label">Prelim</span>
+      <span class="card-bar-weight">Women's Flyweight · 125 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <img src="https://pflmma-prod.s3.us-east-1.amazonaws.com/fighters/headshots/b47e60009868a78b85d385cca65eee84-1.png" alt="Taila Santos">
+          <div class="photo-grad"></div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇧🇷</div>
+          <div class="fname">Taila Santos</div>
+          <div class="frecord">22–4 · Ex-UFC title challenger</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <div class="photo-initials">
+            <span class="init-accent"></span>
+            <span class="init-text">QY</span>
+            <span class="init-flag">🇨🇳</span>
+          </div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇨🇳</div>
+          <div class="fname">Qihui Yan</div>
+          <div class="frecord">WFLY · PFL roster</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        Santos is the highest-profile name on the prelims — former UFC flyweight title challenger with 14 stoppages in 22 wins. The marquee prelim fight.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRELIM 4 -->
+  <div class="fight-card" data-category="prelim" data-fight-idx="9">
+    <div class="card-bar">
+      <span class="card-bar-label">Prelim</span>
+      <span class="card-bar-weight">Featherweight · 145 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <div class="photo-initials">
+            <span class="init-accent"></span>
+            <span class="init-text">HB</span>
+            <span class="init-flag">🇵🇪</span>
+          </div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇵🇪</div>
+          <div class="fname">Humberto Bandenay</div>
+          <div class="frecord">27–9 · The Peruvian Problem</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <div class="photo-initials">
+            <span class="init-accent"></span>
+            <span class="init-text">SK</span>
+            <span class="init-flag">🇰🇷</span>
+          </div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇰🇷</div>
+          <div class="fname">Sang Won Kim</div>
+          <div class="frecord">FW · South Korean contender</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        Two finish-minded fighters. Bandenay is an aggressive Peruvian veteran. Kim brings South Korean striking pedigree. Could be the sleeper of the night.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRELIM 5 -->
+  <div class="fight-card" data-category="prelim" data-fight-idx="10">
+    <div class="card-bar">
+      <span class="card-bar-label">Prelim</span>
+      <span class="card-bar-weight">Lightweight · 155 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <div class="photo-initials">
+            <span class="init-accent"></span>
+            <span class="init-text">AA</span>
+            <span class="init-flag">🇺🇸</span>
+          </div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇺🇸</div>
+          <div class="fname">Angel Alvarez</div>
+          <div class="frecord">LW · PFL roster</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <div class="photo-initials">
+            <span class="init-accent"></span>
+            <span class="init-text">BL</span>
+            <span class="init-flag">🇺🇸</span>
+          </div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇺🇸</div>
+          <div class="fname">Bryce Logan</div>
+          <div class="frecord">LW · PFL roster</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        Lightweight prelim matchup between two PFL roster fighters. Odds and profile images to be updated fight week.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRELIM 6 -->
+  <div class="fight-card" data-category="prelim" data-fight-idx="11">
+    <div class="card-bar">
+      <span class="card-bar-label">Prelim</span>
+      <span class="card-bar-weight">Welterweight · 170 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <div class="photo-initials">
+            <span class="init-accent"></span>
+            <span class="init-text">BB</span>
+            <span class="init-flag">🇺🇸</span>
+          </div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇺🇸</div>
+          <div class="fname">Brett Bye</div>
+          <div class="frecord">WW · PFL roster</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <div class="photo-initials">
+            <span class="init-accent"></span>
+            <span class="init-text">TM</span>
+            <span class="init-flag">🇺🇸</span>
+          </div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇺🇸</div>
+          <div class="fname">Taylor Michels</div>
+          <div class="frecord">WW · PFL roster</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        Welterweight prelim. Odds and imagery to be updated closer to the event.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRELIM 7 — OPENER -->
+  <div class="fight-card" data-category="prelim" data-fight-idx="12">
+    <div class="card-bar">
+      <span class="card-bar-label">Card opener</span>
+      <span class="card-bar-weight">Heavyweight · 265 lb</span>
+    </div>
+    <div class="matchup">
+      <div class="fighter-col">
+        <div class="photo red-tint">
+          <div class="photo-initials">
+            <span class="init-accent"></span>
+            <span class="init-text">DN</span>
+            <span class="init-flag">🇨🇲</span>
+          </div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇨🇲</div>
+          <div class="fname">M. Djantou Nana</div>
+          <div class="frecord">HW · Cameroon</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+      <div class="vs-col"><span class="vs-text">VS</span></div>
+      <div class="fighter-col">
+        <div class="photo blue-tint">
+          <div class="photo-initials">
+            <span class="init-accent"></span>
+            <span class="init-text">KW</span>
+            <span class="init-flag">🇬🇧</span>
+          </div>
+        </div>
+        <div class="finfo">
+          <div class="fflag">🇬🇧</div>
+          <div class="fname">Karl Williams</div>
+          <div class="frecord">HW · UK</div>
+          <div class="odds tbd"><span class="odds-n tbd">TBC</span><span class="odds-t tbd">Odds pending</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-wrap">
+      <div class="ctx-avatar">PFL</div>
+      <div class="ctx-bubble">
+        <span class="ctx-label">The storyline</span>
+        Opens the card. Maxwell Djantou Nana from Cameroon vs Karl Williams from the UK — an international heavyweight matchup to kick off the night.
+      </div>
+    </div>
+  </div>
+
+  <p class="disclaimer">
+    Odds are indicative, subject to change, and sourced from DraftKings unless stated. This content is for informational purposes only and does not constitute betting advice. Gambling should be done responsibly. 18+ only. If gambling is affecting you or someone you know, visit <a href="https://www.begambleaware.org" target="_blank">begambleaware.org</a> or call 0808 8020 133.
+  </p>
+
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// COUNTDOWN TIMER
+// ══════════════════════════════════════════
+(function(){
+  const target = new Date(document.getElementById('countdownBar').dataset.target).getTime();
+  const elD = document.getElementById('cdDays');
+  const elH = document.getElementById('cdHours');
+  const elM = document.getElementById('cdMins');
+  const elS = document.getElementById('cdSecs');
+  const pad = n => String(Math.max(0,n)).padStart(2,'0');
+  function tick() {
+    const diff = target - Date.now();
+    if (diff <= 0) {
+      elD.textContent = '00'; elH.textContent = '00'; elM.textContent = '00'; elS.textContent = '00';
+      document.querySelector('.countdown-label').textContent = 'Fight night is here';
+      return;
+    }
+    elD.textContent = pad(Math.floor(diff / 86400000));
+    elH.textContent = pad(Math.floor(diff / 3600000) % 24);
+    elM.textContent = pad(Math.floor(diff / 60000) % 60);
+    elS.textContent = pad(Math.floor(diff / 1000) % 60);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+// ══════════════════════════════════════════
+// FILTER PILLS
+// ══════════════════════════════════════════
+(function(){
+  const pills = document.querySelectorAll('.filter-pill');
+  const cards = document.querySelectorAll('.fight-card');
+  pills.forEach(p => p.addEventListener('click', () => {
+    pills.forEach(x => x.classList.remove('active'));
+    p.classList.add('active');
+    const f = p.dataset.filter;
+    cards.forEach(c => {
+      let show = true;
+      if (f === 'main')     show = c.dataset.category === 'main';
+      if (f === 'prelim')   show = c.dataset.category === 'prelim';
+      if (f === 'confirmed') show = !c.querySelector('.odds.tbd');
+      c.dataset.hidden = show ? 'false' : 'true';
+    });
+  }));
+})();
+
+// ══════════════════════════════════════════
+// KEYBOARD NAV — arrow keys scroll between fight cards
+// ══════════════════════════════════════════
+(function(){
+  document.addEventListener('keydown', (e) => {
+    if (e.target.matches('input, textarea, button')) return;
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'j' && e.key !== 'k') return;
+    e.preventDefault();
+    const cards = Array.from(document.querySelectorAll('.fight-card'))
+      .filter(c => c.dataset.hidden !== 'true');
+    const scrollY = window.scrollY + 100;
+    let currentIdx = cards.findIndex(c => c.offsetTop >= scrollY);
+    if (currentIdx === -1) currentIdx = cards.length - 1;
+    const dir = (e.key === 'ArrowDown' || e.key === 'j') ? 1 : -1;
+    const nextIdx = Math.max(0, Math.min(cards.length - 1, currentIdx + dir));
+    cards[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
+</script>
+
+</body>
+</html>
