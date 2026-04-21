@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PFL Shareable HTML Pages</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f3f4f6;color:#111827}
+.wrap{max-width:980px;margin:0 auto;padding:48px 20px 64px}
+.kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;
+font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+h1{font-size:40px;line-height:1.05;margin:16px 0 10px}
+.lead{max-width:760px;color:#4b5563;font-size:16px;line-height:1.6;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:28px}
+.card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+.card h2{margin:0 0 8px;font-size:24px}
+.card p{margin:0 0 18px;color:#4b5563;line-height:1.6;font-size:14px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;padding:10px 14px;border-radius:10px;font-weight:700;font-size:14px}
+.btn-primary{background:#111827;color:#fff}
+.btn-secondary{background:#f3f4f6;color:#111827;border:1px solid rgba(0,0,0,.08)}
+.note{margin-top:28px;padding:16px 18px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:14px;color:#4b5563;font-size:14px;line-height:1.6}
+code{background:#eef2f7;padding:2px 6px;border-radius:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="kicker">PFL mini site</span>
+  <h1>Shareable HTML pages</h1>
+  <p class="lead">This package contains three standalone pages you can send to colleagues. They open directly in a browser and include a simple top bar for navigation between pages.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Odds Widget</h2>
+      <p>A compact live-style odds page with fight switching, market tabs and geo toggles.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="odds-widget.html">Open page</a>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Fight Picks</h2>
+      <p>A fuller event page with the full card, countdown, filters and fight-by-fight context.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="fight-picks.html">Open page</a>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Bet Builder</h2>
+      <p>A styled bet-builder page with stake controls, returns, links and sharing actions.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="bet-builder.html">Open page</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    Best way to share: send the whole folder or the ZIP so the internal links keep working. If you host these on SharePoint, Drive, Dropbox or an internal web server, use <code>index.html</code> as the entry page.
+  </div>
+</div>
+</body>
+</html>
